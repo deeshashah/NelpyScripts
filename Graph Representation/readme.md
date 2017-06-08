@@ -29,4 +29,4 @@ More about networkX, [networkX](http://networkx.readthedocs.io/en/networkx-1.10/
 
 #### Output 
 
-<kbd>![normal](https://raw.githubusercontent.com/rikenshah/Nelpy/master/workingScreenshot.png)</kbd>
+<kbd>![normal](https://raw.githubusercontent.com/rikenshah/Nelpy/master/Graph Representation/workingScreenshot.png)</kbd>
