@@ -1,0 +1,4 @@
+*.pyc
+stanford-parser-full
+graph_images
+stanford-parser
