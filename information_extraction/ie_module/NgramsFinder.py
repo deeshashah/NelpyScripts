@@ -3,21 +3,18 @@ import nltk
 class NgramsFinder(object):
 		
 	def __init__(self,sentence):
-
 		self.sentence = sentence
-
 		#Inspired from Su Nam Kim Paper...
 		self.grammar = r"""
-			NBAR:
-				{<NN.*|JJ>*<NN.*>}  # Nouns and Adjectives, terminated with Nouns
-				
-			NP:
-				{<NBAR>}
-				{<NBAR><IN><NBAR>}  # Above, connected with in/of/etc...
-		"""
+							NBAR:
+								{<NN.*|JJ>*<NN.*>}  # Nouns and Adjectives, terminated with Nouns
+							NP:
+								{<NBAR>}
+								{<NBAR><IN><NBAR>}  # Above, connected with in/of/etc...
+						"""
 		
 
-	def get_bigrams(self):
+	def get_ngrams(self):
 		"""	Returns a list of all bigrams """		
 		chunker = nltk.RegexpParser(self.grammar)
 		toks = nltk.word_tokenize(self.sentence)
