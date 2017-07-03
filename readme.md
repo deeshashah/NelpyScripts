@@ -10,6 +10,14 @@ Understanding of Natural Language involves extraction of knowledge. The extracti
 
 First set up python environment, install dependencies using `requirements.txt`. Follow [this tutorial](put link).
 
+Note : To install `graphviz` and `pygraphviz` in ubuntu, run this command in order. (after activating virtual environment)
+
+```
+sudo apt install python-dev graphviz libgraphviz-dev pkg-config
+pip install graphviz
+pip install pygraphviz
+```
+
 Also set your own path of `stanford-parser` in file `SentenceProcessor.py` line number 10.
 
 ```python
@@ -64,3 +72,6 @@ The output of the above would be,
 
 ### Combine N-grams in a sentence
 
+
+
+### Combine many sentence by common nodes

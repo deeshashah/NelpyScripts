@@ -1,15 +1,13 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-from mergeBigram import MergeBigram
+from SentenceProcessor import SentenceProcessor
 from networkx.drawing.nx_agraph import graphviz_layout
 from graphviz import Source
 import networkx as nx
 import matplotlib.pyplot as plt
-import pydot, pygraphviz
+import pygraphviz
 from networkx.drawing.nx_agraph import graphviz_layout
-from nltk.corpus import stopwords
-from nltk.tokenize import sent_tokenize
-import pprint, os
+import os
 
 class MultiSentenceGraph(object):
 
@@ -20,8 +18,6 @@ class MultiSentenceGraph(object):
 	def getGraph(self): 
 		# Here we will call everythimg that wil create a merged graph
 
-		# pp = pprint.PrettyPrinter(indent=4)
-		# sentenceList = sent_tokenize(paragraph)
 
 		mg = nx.MultiDiGraph()
 
@@ -37,25 +33,24 @@ class MultiSentenceGraph(object):
 		nx.draw(mg,pos=graphviz_layout(mg,prog='neato'),arrows=True,with_labels=True,alpha=0.5,linewidths=0.5,scale=2)
 		nx.draw_networkx_edge_labels(mg, pos = graphviz_layout(mg, prog='neato'),labels = nx.get_edge_attributes(mg,'label'))
 		# plt.show()
-		if(os.path.exists("static/netXGraph/1.png")):
-			os.remove("static/netXGraph/1.png")
+		if(os.path.exists("graph_images/multisentence_graph/combined_multisentence_graph.png")):
+			os.remove("graph_images/multisentence_graph/combined_multisentence_graph.png")
 
 		print "Hahahah"
-		plt.savefig("static/netXGraph/1.png", format = "PNG")
+		plt.savefig("graph_images/multisentence_graph/combined_multisentence_graph.png", format = "PNG")
 
 	def getMergedGraph(self, ng, sentenceOne,index):
 
 		print "\n\nNX Code being executed - "
-		m = MergeBigram()
+		s = SentenceProcessor(sentenceOne,index)
 
 		# sentenceOne = "Search engine firm Google has released a trial tool which is concerning some net users because it directs people to pre-selected commercial websites."
 		# sentenceTwo = "The AutoLink feature comes with Google's latest toolbar and provides links in a webpage to Amazon.com if it finds a book's ISBN number on the site"
 
-		dotFirst = m.merge_bigram(sentenceOne)
-		# dotSecond = m.merge_bigram(sentenceTwo)
+		dotFirst = s.get_merged_ngrams()
 		
 		# This is where I want to store the bigram merged images
-		filepath = "static/dotGraphImages/"+str(index)+"merged"
+		filepath = "graph_images/ngrams_merged_images/"+str(index)+"merged"
 		s = Source(dotFirst, filename=filepath, format="png")
 		s.render(filename=filepath)
 
