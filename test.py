@@ -1,5 +1,5 @@
-from ie_module.SentenceProcessor import SentenceProcessor
-from ie_module.NgramsFinder import NgramsFinder
+from nelpy_module.SentenceProcessor import SentenceProcessor
+from nelpy_module.NgramsFinder import NgramsFinder
 
 print "\nDependency parsing of the sentence 'John is a computer scientist' is:"
 s = SentenceProcessor('John is a computer scientist',1)
