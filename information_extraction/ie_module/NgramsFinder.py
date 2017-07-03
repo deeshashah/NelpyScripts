@@ -12,7 +12,6 @@ class NgramsFinder(object):
 								{<NBAR>}
 								{<NBAR><IN><NBAR>}  # Above, connected with in/of/etc...
 						"""
-		
 
 	def get_ngrams(self):
 		"""	Returns a list of all bigrams """		
@@ -22,7 +21,6 @@ class NgramsFinder(object):
 		tree = chunker.parse(postoks)
 		required_ones = [leave for leave in self.leaves(tree) if len(leave) >= 2]
 		return self.get_clean_list(required_ones)
-		# return required_ones
 
 	def leaves(self,tree):
 		""" Finds NP (nounphrase) leaf nodes of a chunk tree """
