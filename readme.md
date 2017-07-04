@@ -72,6 +72,39 @@ The output of the above would be,
 
 ### Combine N-grams in a sentence
 
+Once we have found out which Ngrams in a sentence are making sense together, we need to represent it a graph. So to make a `dot` formatted graph after combining the Ngrams of a sentence, following code can be used.
 
+```python
+from nelpy_module.SentenceProcessor import SentenceProcessor
+s = SentenceProcessor('John is a computer scientist',1)
+print s.get_merged_ngrams_dotgraph()
+s.save_merged_ngrams_graph()
+```
 
-### Combine many sentence by common nodes
+The output would be : 
+
+```dot
+digraph G{
+edge [dir=forward]
+node [shape=plaintext]
+0 [label="0 (None)"]
+0 -> 5 [label="root"]
+1 [label="1 (John)"]
+2 [label="2 (is)"]
+3 [label="3 (a)"]
+5 [label="5 (computer scientist)"]
+5 -> 2 [label="cop"]
+5 -> 5 [label="compound"]
+5 -> 3 [label="det"]
+5 -> 1 [label="nsubj"]
+}
+```
+
+And this image would be saved in the specified `filepath`
+
+![put image](here)
+
+Note : The word with lesser references (low level in the dot tree, nearer to leave) gets replaced.  
+
+### Combine many sentences by common nodes
+

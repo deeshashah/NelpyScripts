@@ -32,7 +32,7 @@ class SentenceProcessor(object):
 		s = Source(self.dotgraph, filename=self.filepath, format="png")
 		s.render(filename=self.filepath, cleanup = False) # 'Cleanup = True', deletes the source file after rendering, also 'view = True' can be used to open the rendered file by default
 
-	def get_merged_ngrams(self):
+	def get_merged_ngrams_dotgraph(self):
 		dotOriginal = self.get_parsed_dotgraph()
 		n = NgramsFinder(self.sentence)
 		listBigrams = n.get_ngrams()
@@ -52,3 +52,9 @@ class SentenceProcessor(object):
 					nextTerm = singleBigram[n-1-i]+" "+nextTerm
 
 		return dotOriginal
+
+	def save_merged_ngrams_graph(self):
+		merged_ngrams_dot = self.get_merged_ngrams_dotgraph()
+		filepath = "graph_images/ngrams_merged_images/"+str(self.sentence_id)+"merged"
+		s = Source(merged_ngrams_dot, filename=filepath, format="png")
+		s.render(filename=filepath)

@@ -47,7 +47,7 @@ class MultiSentenceGraph(object):
 		# single_sentence = "Search engine firm Google has released a trial tool which is concerning some net users because it directs people to pre-selected commercial websites."
 		# sentenceTwo = "The AutoLink feature comes with Google's latest toolbar and provides links in a webpage to Amazon.com if it finds a book's ISBN number on the site"
 
-		merged_dotgraph = s.get_merged_ngrams()
+		merged_dotgraph = s.get_merged_ngrams_dotgraph()
 		
 		# This is where I want to store the bigram merged images
 		filepath = "graph_images/ngrams_merged_images/"+str(index)+"merged"
