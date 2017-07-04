@@ -15,14 +15,14 @@ class MultiSentenceGraph(object):
 		self.sentence_dict = sentence_dict
 
 	# Takes a dict of {'index':'sentence'}
-	def getGraph(self): 
+	def get_multisentence_merged_graph(self): 
 		# Here we will call everythimg that wil create a merged graph
 
 
 		mg = nx.MultiDiGraph()
 
-		for index,sent in self.sentence_dict.iteritems():
-			mg = self.getMergedGraph(mg,sent,index)
+		for index,sentence in self.sentence_dict.iteritems():
+			mg = self.merge_single_sentence(mg,sentence,index)
 
 		# Printing PageRank score
 		print "\n\n PAGERANK \n"
@@ -39,19 +39,19 @@ class MultiSentenceGraph(object):
 		print "Hahahah"
 		plt.savefig("graph_images/multisentence_graph/combined_multisentence_graph.png", format = "PNG")
 
-	def getMergedGraph(self, ng, sentenceOne,index):
+	def merge_single_sentence(self, ng, single_sentence,index):
 
 		print "\n\nNX Code being executed - "
-		s = SentenceProcessor(sentenceOne,index)
+		s = SentenceProcessor(single_sentence,index)
 
-		# sentenceOne = "Search engine firm Google has released a trial tool which is concerning some net users because it directs people to pre-selected commercial websites."
+		# single_sentence = "Search engine firm Google has released a trial tool which is concerning some net users because it directs people to pre-selected commercial websites."
 		# sentenceTwo = "The AutoLink feature comes with Google's latest toolbar and provides links in a webpage to Amazon.com if it finds a book's ISBN number on the site"
 
-		dotFirst = s.get_merged_ngrams()
+		merged_dotgraph = s.get_merged_ngrams()
 		
 		# This is where I want to store the bigram merged images
 		filepath = "graph_images/ngrams_merged_images/"+str(index)+"merged"
-		s = Source(dotFirst, filename=filepath, format="png")
+		s = Source(merged_dotgraph, filename=filepath, format="png")
 		s.render(filename=filepath)
 
 
@@ -59,7 +59,7 @@ class MultiSentenceGraph(object):
 		# g.remove_edges_from(g.selfloop_edges())
 
 		# Lets make a multi digraph, so that multiple directed edges are allowed.
-		g = nx.drawing.nx_agraph.from_agraph(pygraphviz.AGraph(dotFirst))
+		g = nx.drawing.nx_agraph.from_agraph(pygraphviz.AGraph(merged_dotgraph))
 
 		# print g.nodes(data=True)
 
@@ -74,9 +74,9 @@ class MultiSentenceGraph(object):
 		# h = nx.drawing.nx_agraph.from_agraph(pygraphviz.AGraph(dotSecond))
 		# print h.nodes(data=True)
 
-		pg = self.preprocessGraph(g)		
+		pg = self.preprocess_graph(g)		
 		
-		# ph = self.preprocessGraph(h)
+		# ph = self.preprocess_graph(h)
 
 		# Now combinign both graphs
 		# ng = nx.compose(g,h)
@@ -87,7 +87,7 @@ class MultiSentenceGraph(object):
 		return mg
 
 	# Now preprocessing graphs so that the attributes are converted as node labels
-	def preprocessGraph(self,g):
+	def preprocess_graph(self,g):
 		pg = nx.MultiDiGraph()
 		mappingDict = {}
 		for i in g.nodes(data=True):
